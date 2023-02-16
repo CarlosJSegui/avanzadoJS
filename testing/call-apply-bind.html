@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>call-apply-bind</title>
+    </head>
+
+    <body>
+
+        <a href="/testing/">Go back</a>
+        <p><em>Abre la consola</em></p>
+
+        <ul>
+            <li><button class="call-to-action">Aprender</button></li>
+            <li><button class="call-to-action">Aprender Más</button></li>
+            <li><button class="call-to-action">Nunca parar de Aprender</button></li>
+        </ul>
+
+            <script>
+                // Establece this usando call
+
+                function saludar() {
+                    console.log(`Hola, soy ${this.name} ${this.apellido}`);
+                }
+
+                const richard = {
+                    name: "Richard",
+                    apellido: "Kaufman"
+                }
+
+                saludar.call(richard); // Se establece el valor del this(richard) en la función saludar
+
+                // Establece this usando call y pasar argumentos a la función
+                
+                function caminar (metros, direccion) {
+                    console.log(`${this.name} camina ${metros} metros hacia el ${direccion}.`);
+                }
+
+                caminar.call(richard, 400, "norte"); // Se pasan los argumentos después de establecer quien es el this(richard)
+                
+                // Establece this usando apply y pasar argumentos a la función
+
+                const valores = [10000, "este"];
+                caminar.apply(richard, valores);
+                caminar.apply(richard, [800, "noreste"]);
+
+                //Call = c de comas se pasan los argumentos
+                //Apply = a de arreglo se pasa un array con los argumentos
+
+                // Establecer this en una nueva función usando bind
+                
+                const daniel = {
+                    name: "Daniel",
+                    apellido: "Sánchez"
+                }
+
+                const danielSaluda = saludar.bind(daniel);
+                danielSaluda();
+
+                const danielCamina = caminar.bind(daniel)
+                danielCamina(1200, "oeste");
+
+                const danielCamina1 = caminar.bind(daniel, 1600, "sur");
+                danielCamina1();
+
+                const danielCamina2 = caminar.bind(daniel, 2000);
+                danielCamina2("sureste");
+
+                // Cuando es útil usar uno de estos métodos
+
+                const buttons = document.getElementsByClassName("call-to-action");
+                // buttons.forEach(button => {
+                //     button.onclick = () => alert("Nunca pares de aprender!!");
+                // });
+
+                // buttons son NODELIST no es una funcion ni un arreglo
+
+                Array.prototype.forEach.call(buttons, button => {
+                    button.onclick = () => alert("Nunca pares de aprender!!");
+                });
+
+        </script>
+        
+    </body>
+</html>
