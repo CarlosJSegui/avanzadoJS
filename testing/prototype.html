@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prototype</title>
+    </head>
+    <body>
+        <a href="/testing/">Go Back</a>
+        <p><em>Abre la consoola</em></p>
+
+        <script>
+            // Un objeto común y corriente
+
+            // const zelda = {
+            //     name: "Zelda"
+            // }
+
+            // zelda.saludar = function () {
+            //     console.log(`Hola, soy ${this.name}`);
+            // }
+
+            // zelda.saludar();
+
+            // // Otro objeto más
+
+            // const link = {
+            //     name: "Link"
+            // }
+
+            // link.saludar = function () {
+            //     console.log(`Hola, soy ${this.name}`);
+            // }
+
+            // link.saludar();
+
+            // // Seamos un poco más eficientes
+
+            // function Hero(name) {
+            //     const hero = {
+            //         name: name
+            //     }
+
+            //     hero.saludar = function() {
+            //         console.log(`Hola, soy ${this.name}`);
+            //     };
+
+            //     return hero
+            // }
+            
+            // const thor = Hero("Thor")
+            // thor.saludar();
+
+            // const hulk = Hero("Hulk")
+            // hulk.saludar();
+
+
+            // Aún podemos mejorar más y evitar tener que crear la misma función cada vez que llamamos hero
+
+            // const heroMethods = {
+            //     saludar: function() {
+            //         console.log(`Hola, me llamo ${this.name}`);
+            //     },
+            // };
+
+            // function Hero(name) {
+            //     const hero = {
+            //         name: name
+            //     };
+
+            //     hero.saludar = heroMethods.saludar;
+            //     return hero;
+            // }
+            
+            // const batman = Hero("Batman")
+            // batman.saludar();
+
+            // const superman = Hero("Superman")
+            // superman.saludar();
+
+            // Object.create
+            // const nuevoObjeto = Object.create(objeto)
+
+            // const heroMethods = {
+            //     saludar: function() {
+            //         console.log(`Hola, me llamo ${this.name}`);
+            //     },
+            // };
+
+            // function Hero(name) {
+            //     const hero = Object.create(heroMethods);
+            //     hero.name = name;
+
+            //     return hero;
+            // }
+            
+            // const batman = Hero("Batman")
+            // batman.saludar();
+
+            // const superman = Hero("Superman")
+            // superman.saludar();
+
+
+            // Los métodos de hero dentro de Hero 
+
+            // function Hero(name) {
+            //     const hero = Object.create(Hero.prototype);
+            //     hero.name = name;
+
+            //     return hero;
+            // }
+
+            // Hero.prototype.saludar = function() {
+            //     console.log(`Hola, me llamo ${this.name}`);
+            // }
+            
+            // const batman = Hero("Batman");
+            // batman.saludar();
+
+            // const superman = Hero("Superman")
+            // superman.saludar();
+
+            // new es un atajo (azucar sintáctica) para llevar Hero.prototype al objeto
+
+            function Hero(name) {
+                // const hero = Object.create(Hero.prototype);  ||al declarar new esta linea se crea por defecto e inicializa this con el valor de hero
+                this.name = name;
+
+                // return this; || esto tambiés lo hace por defecto
+            }
+
+            Hero.prototype.saludar = function() {
+                console.log(`Hola, soy el new hero ${this.name}`);
+            }
+            
+            const batman = new Hero("Batman");
+            batman.saludar();
+
+            const superman = new Hero("Superman")
+            superman.saludar();
+
+        </script>
+    </body>
+</html>
