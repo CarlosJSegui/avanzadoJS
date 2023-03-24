@@ -6,7 +6,7 @@ const playPause = document.querySelector ("#playPause")
 const muteUnmute = document.querySelector ("#muteUnmute")
 const player = new MediaPlayer({
     el: video, 
-    // plugins: [new AutoPlay()]
+    plugins: [new AutoPlay()]
 });
 
 playPause.onclick = () => player.togglePlay();
